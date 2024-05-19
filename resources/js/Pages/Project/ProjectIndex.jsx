@@ -7,6 +7,8 @@ import {
     PROJECT_STATUS_TEXT_MAP,
 } from "@/constants.jsx";
 import { Head, Link, router } from "@inertiajs/react";
+import { ChevronUpIcon, ChevronDownIcon } from "@heroicons/react/16/solid";
+import TableHeading from "@/Components/TableHeading";
 
 export default function ProjectIndex({ auth, projects, queryParams = null }) {
     queryParams = queryParams || {};
@@ -28,7 +30,10 @@ export default function ProjectIndex({ auth, projects, queryParams = null }) {
 
     const sortField = (field) => {
         let direction = "asc";
-        if (queryParams.sort_field === field && queryParams.sort_direction === "asc") {
+        if (
+            queryParams.sort_field === field &&
+            queryParams.sort_direction === "asc"
+        ) {
             direction = "desc";
         }
 
@@ -36,7 +41,7 @@ export default function ProjectIndex({ auth, projects, queryParams = null }) {
         queryParams.sort_direction = direction;
 
         router.get(route("project.index", queryParams));
-    }
+    };
 
     return (
         <AuthenticatedLayout
@@ -53,34 +58,64 @@ export default function ProjectIndex({ auth, projects, queryParams = null }) {
                     <div className="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                         <div className="p-6 text-gray-900">
                             <div className="overflow-x-auto">
-                                <table className="min-w-full divide-y-2 divide-gray-200 bg-white text-sm">
-                                    <thead className="ltr:text-left rtl:text-right">
+                                <table className="w-full text-sm text-left rtl:text-right text-gray-900 divide-y-2 divide-gray-200">
+                                    <thead className="text-xs text-gray-900 uppercase bg-gray-300">
                                         <tr>
-                                            <th className="whitespace-nowrap px-4 py-2 font-medium text-gray-900">
+                                            <TableHeading
+                                                name="id"
+                                                sortable={false}
+                                                >
                                                 ID
-                                            </th>
-                                            <th className="whitespace-nowrap px-4 py-2 font-medium text-gray-900">
+                                            </TableHeading>
+
+                                            <TableHeading
+                                                name="image_path"
+                                                sortable={false}
+                                                >
                                                 Image
-                                            </th>
-                                            <th onClick={(e) => sortField('name')} className="whitespace-nowrap px-4 py-2 font-medium text-gray-900">
+                                            </TableHeading>
+
+                                            <TableHeading
+                                                name="name"
+                                                sort_field={queryParams.sort_field}
+                                                sort_direction={queryParams.sort_direction}
+                                                sortField={sortField}
+                                                >
                                                 Name
-                                            </th>
-                                            <th onClick={(e) => sortField('status')} className="whitespace-nowrap px-4 py-2 font-medium text-gray-900">
+                                            </TableHeading>
+                                            <TableHeading
+                                                name="status"
+                                                sort_field={queryParams.sort_field}
+                                                sort_direction={queryParams.sort_direction}
+                                                sortField={sortField}
+                                                >
                                                 Status
-                                            </th>
-                                            <th onClick={(e) => sortField('created_at')} className="whitespace-nowrap px-4 py-2 font-medium text-gray-900">
+                                            </TableHeading>
+                                            <TableHeading
+                                                name="created_at"
+                                                sort_field={queryParams.sort_field}
+                                                sort_direction={queryParams.sort_direction}
+                                                sortField={sortField}
+                                                >
                                                 Created
-                                            </th>
-                                            <th onClick={(e) => sortField('deadline')} className="whitespace-nowrap px-4 py-2 font-medium text-gray-900">
+                                            </TableHeading>
+                                            <TableHeading
+                                                name="deadline"
+                                                sort_field={queryParams.sort_field}
+                                                sort_direction={queryParams.sort_direction}
+                                                sortField={sortField}
+                                                >
                                                 Ends on
-                                            </th>
-                                            <th className="whitespace-nowrap px-4 py-2 font-medium text-gray-900">
+                                            </TableHeading>
+                                            <TableHeading
+                                                name="created_by"
+                                                sortable={false}
+                                                >
                                                 Created by
-                                            </th>
-                                            <th className="whitespace-nowrap px-4 py-2 font-medium text-gray-900">
+                                            </TableHeading>
+                                            <th className="whitespace-nowrap px-4 py-2 font-medium">
                                                 Action
                                             </th>
-                                            <th className="px-4 py-2"></th>
                                         </tr>
                                     </thead>
                                     <thead className="ltr:text-left rtl:text-right">
