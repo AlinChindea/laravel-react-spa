@@ -26,6 +26,18 @@ export default function ProjectIndex({ auth, projects, queryParams = null }) {
         searchFieldChanged(field, e.target.value);
     };
 
+    const sortField = (field) => {
+        let direction = "asc";
+        if (queryParams.sort_field === field && queryParams.sort_direction === "asc") {
+            direction = "desc";
+        }
+
+        queryParams.sort_field = field;
+        queryParams.sort_direction = direction;
+
+        router.get(route("project.index", queryParams));
+    }
+
     return (
         <AuthenticatedLayout
             user={auth.user}
@@ -50,16 +62,16 @@ export default function ProjectIndex({ auth, projects, queryParams = null }) {
                                             <th className="whitespace-nowrap px-4 py-2 font-medium text-gray-900">
                                                 Image
                                             </th>
-                                            <th className="whitespace-nowrap px-4 py-2 font-medium text-gray-900">
+                                            <th onClick={(e) => sortField('name')} className="whitespace-nowrap px-4 py-2 font-medium text-gray-900">
                                                 Name
                                             </th>
-                                            <th className="whitespace-nowrap px-4 py-2 font-medium text-gray-900">
+                                            <th onClick={(e) => sortField('status')} className="whitespace-nowrap px-4 py-2 font-medium text-gray-900">
                                                 Status
                                             </th>
-                                            <th className="whitespace-nowrap px-4 py-2 font-medium text-gray-900">
+                                            <th onClick={(e) => sortField('created_at')} className="whitespace-nowrap px-4 py-2 font-medium text-gray-900">
                                                 Created
                                             </th>
-                                            <th className="whitespace-nowrap px-4 py-2 font-medium text-gray-900">
+                                            <th onClick={(e) => sortField('deadline')} className="whitespace-nowrap px-4 py-2 font-medium text-gray-900">
                                                 Ends on
                                             </th>
                                             <th className="whitespace-nowrap px-4 py-2 font-medium text-gray-900">
