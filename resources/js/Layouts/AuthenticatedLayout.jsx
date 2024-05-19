@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import ApplicationLogo from '@/Components/ApplicationLogo';
 import Dropdown from '@/Components/Dropdown';
-import NavLink from '@/Components/NavLink';
+import AuthNavigation from '@/Components/AuthNavigation';
 import ResponsiveNavLink from '@/Components/ResponsiveNavLink';
 import { Link } from '@inertiajs/react';
 
@@ -20,11 +20,8 @@ export default function Authenticated({ user, header, children }) {
                                 </Link>
                             </div>
 
-                            <div className="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                                <NavLink href={route('dashboard')} active={route().current('dashboard')}>
-                                    Dashboard
-                                </NavLink>
-                            </div>
+                            <AuthNavigation user={user} />
+                            
                         </div>
 
                         <div className="hidden sm:flex sm:items-center sm:ms-6">
