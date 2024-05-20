@@ -8,6 +8,7 @@ import {
 } from "@/constants.jsx";
 import { Head, Link, router } from "@inertiajs/react";
 import TableHeading from "@/Components/TableHeading";
+import { PencilSquareIcon, EyeIcon, TrashIcon } from "@heroicons/react/16/solid";
 
 export default function ProjectIndex({
     auth,
@@ -45,6 +46,14 @@ export default function ProjectIndex({
         queryParams.sort_direction = direction;
 
         router.get(route("project.index", queryParams));
+    };
+
+    const deleteProject = (project) => {
+        if (!window.confirm("Are you sure you want to delete this project?")) {
+            return;
+        }
+
+        router.delete(route("project.destroy", project));
     };
 
     return (
@@ -146,8 +155,8 @@ export default function ProjectIndex({
                                             >
                                                 Created by
                                             </TableHeading>
-                                            <th className="whitespace-nowrap px-4 py-2 font-medium">
-                                                Action
+                                            <th className="whitespace-nowrap px-4 py-2 font-medium text-center">
+                                                Actions
                                             </th>
                                         </tr>
                                     </thead>
@@ -255,15 +264,26 @@ export default function ProjectIndex({
                                                     {project.created_by.name}
                                                 </td>
                                                 <td className="whitespace-nowrap px-4 py-3">
-                                                    <Link
-                                                        href={route(
-                                                            "project.show",
-                                                            project.id
-                                                        )}
-                                                        className="inline-block rounded bg-blue-600 px-4 py-2 text-xs font-medium text-white hover:bg-indigo-700"
-                                                    >
-                                                        View
-                                                    </Link>
+                                                    <div className="inline-flex rounded-lg border border-gray-100 bg-gray-100 p-1">
+                                                        <button className="inline-flex items-center gap-2 rounded-md px-4 py-2 text-sm text-blue-500 hover:text-blue-700 focus:relative">
+                                                            <PencilSquareIcon className="h-4 w-4"/>
+                                                            Edit
+                                                        </button>
+
+                                                        <Link
+                                                            href={route("project.show", project.id)}
+                                                            className="inline-flex items-center gap-2 rounded-md px-4 py-2 text-sm text-gray-500 hover:text-gray-700 focus:relative">
+                                                            <EyeIcon className="h-4 w-4"/>
+                                                            View
+                                                        </Link>
+
+                                                        <button
+                                                            onClick={(e) => deleteProject(project)}
+                                                            className="inline-flex items-center gap-2 rounded-md bg-white px-4 py-2 text-sm text-red-500 hover:text-red-700 shadow-sm focus:relative">
+                                                            <TrashIcon className="h-4 w-4"/>
+                                                            Delete
+                                                        </button>
+                                                    </div>
                                                 </td>
                                             </tr>
                                         ))}
