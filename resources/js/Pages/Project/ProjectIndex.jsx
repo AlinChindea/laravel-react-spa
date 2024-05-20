@@ -265,10 +265,12 @@ export default function ProjectIndex({
                                                 </td>
                                                 <td className="whitespace-nowrap px-4 py-3">
                                                     <div className="inline-flex rounded-lg border border-gray-100 bg-gray-100 p-1">
-                                                        <button className="inline-flex items-center gap-2 rounded-md px-4 py-2 text-sm text-blue-500 hover:text-blue-700 focus:relative">
+                                                        <Link
+                                                            href={route("project.edit", project.id)}
+                                                            className="inline-flex items-center gap-2 rounded-md px-4 py-2 text-sm text-blue-500 hover:text-blue-700 focus:relative">
                                                             <PencilSquareIcon className="h-4 w-4"/>
                                                             Edit
-                                                        </button>
+                                                        </Link>
 
                                                         <Link
                                                             href={route("project.show", project.id)}
