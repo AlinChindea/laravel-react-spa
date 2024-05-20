@@ -5,7 +5,11 @@ import TextInput from "@/Components/TextInput";
 import TableHeading from "@/Components/TableHeading";
 import { TASK_STATUS_CLASS_MAP, TASK_STATUS_TEXT_MAP } from "@/constants.jsx";
 
-export default function TasksTable({ tasks, queryParams = null, hideProjectInfo = false}) {
+export default function TasksTable({
+    tasks,
+    queryParams = null,
+    hideProjectInfo = false,
+}) {
     queryParams = queryParams || {};
 
     const searchFieldChanged = (field, value) => {
@@ -53,10 +57,14 @@ export default function TasksTable({ tasks, queryParams = null, hideProjectInfo 
                                 Image
                             </TableHeading>
 
-                            {!hideProjectInfo && (<TableHeading name="project_title" sortable={false}>
-                                Project Title
-                            </TableHeading>
-                          )}
+                            {!hideProjectInfo && (
+                                <TableHeading
+                                    name="project_title"
+                                    sortable={false}
+                                >
+                                    Project Title
+                                </TableHeading>
+                            )}
 
                             <TableHeading
                                 name="name"

@@ -9,7 +9,12 @@ import {
 import { Head, Link, router } from "@inertiajs/react";
 import TableHeading from "@/Components/TableHeading";
 
-export default function ProjectIndex({ auth, projects, queryParams = null }) {
+export default function ProjectIndex({
+    auth,
+    projects,
+    queryParams = null,
+    success,
+}) {
     queryParams = queryParams || {};
     const searchFieldChanged = (field, value) => {
         if (value) {
@@ -52,7 +57,8 @@ export default function ProjectIndex({ auth, projects, queryParams = null }) {
                     </h2>
                     <Link
                         href={route("project.create")}
-                        className="bg-emerald-500 py-1 px-3 text-white rounded shadow transition-all">
+                        className="bg-emerald-500 py-1 px-3 text-white rounded shadow transition-all"
+                    >
                         Create Project
                     </Link>
                 </div>
@@ -61,6 +67,11 @@ export default function ProjectIndex({ auth, projects, queryParams = null }) {
             <Head title="Projects" />
             <div className="py-12">
                 <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">
+                    {success && (
+                        <div className="bg-emerald-500 py-2 px-4 text-white rounded mb-4">
+                            {success}
+                        </div>
+                    )}
                     <div className="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                         <div className="p-6 text-gray-900">
                             <div className="overflow-x-auto">
@@ -70,53 +81,69 @@ export default function ProjectIndex({ auth, projects, queryParams = null }) {
                                             <TableHeading
                                                 name="id"
                                                 sortable={false}
-                                                >
+                                            >
                                                 ID
                                             </TableHeading>
 
                                             <TableHeading
                                                 name="image_path"
                                                 sortable={false}
-                                                >
+                                            >
                                                 Image
                                             </TableHeading>
 
                                             <TableHeading
                                                 name="name"
-                                                sort_field={queryParams.sort_field}
-                                                sort_direction={queryParams.sort_direction}
+                                                sort_field={
+                                                    queryParams.sort_field
+                                                }
+                                                sort_direction={
+                                                    queryParams.sort_direction
+                                                }
                                                 sortField={sortField}
-                                                >
+                                            >
                                                 Name
                                             </TableHeading>
                                             <TableHeading
                                                 name="status"
-                                                sort_field={queryParams.sort_field}
-                                                sort_direction={queryParams.sort_direction}
+                                                sort_field={
+                                                    queryParams.sort_field
+                                                }
+                                                sort_direction={
+                                                    queryParams.sort_direction
+                                                }
                                                 sortField={sortField}
-                                                >
+                                            >
                                                 Status
                                             </TableHeading>
                                             <TableHeading
                                                 name="created_at"
-                                                sort_field={queryParams.sort_field}
-                                                sort_direction={queryParams.sort_direction}
+                                                sort_field={
+                                                    queryParams.sort_field
+                                                }
+                                                sort_direction={
+                                                    queryParams.sort_direction
+                                                }
                                                 sortField={sortField}
-                                                >
+                                            >
                                                 Created
                                             </TableHeading>
                                             <TableHeading
                                                 name="deadline"
-                                                sort_field={queryParams.sort_field}
-                                                sort_direction={queryParams.sort_direction}
+                                                sort_field={
+                                                    queryParams.sort_field
+                                                }
+                                                sort_direction={
+                                                    queryParams.sort_direction
+                                                }
                                                 sortField={sortField}
-                                                >
+                                            >
                                                 Ends on
                                             </TableHeading>
                                             <TableHeading
                                                 name="created_by"
                                                 sortable={false}
-                                                >
+                                            >
                                                 Created by
                                             </TableHeading>
                                             <th className="whitespace-nowrap px-4 py-2 font-medium">
@@ -194,7 +221,12 @@ export default function ProjectIndex({ auth, projects, queryParams = null }) {
                                                     />
                                                 </td>
                                                 <td className="whitespace-nowrap px-4 py-3 text-gray-700 text-nowrap hover:underline">
-                                                    <Link href={route("project.show", project.id)}>
+                                                    <Link
+                                                        href={route(
+                                                            "project.show",
+                                                            project.id
+                                                        )}
+                                                    >
                                                         {project.name}
                                                     </Link>
                                                 </td>
