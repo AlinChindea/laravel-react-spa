@@ -92,6 +92,7 @@ export default function ProjectShow({ auth, project, tasks, queryParams }) {
                             <TasksTable
                                 tasks={tasks}
                                 queryParams={queryParams}
+                                hideProjectInfo={true}
                             />
                         </div>
                     </div>

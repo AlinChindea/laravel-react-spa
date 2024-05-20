@@ -5,7 +5,7 @@ import TextInput from "@/Components/TextInput";
 import TableHeading from "@/Components/TableHeading";
 import { TASK_STATUS_CLASS_MAP, TASK_STATUS_TEXT_MAP } from "@/constants.jsx";
 
-export default function TasksTable({ tasks, queryParams = null }) {
+export default function TasksTable({ tasks, queryParams = null, hideProjectInfo = false}) {
     queryParams = queryParams || {};
 
     const searchFieldChanged = (field, value) => {
@@ -53,6 +53,11 @@ export default function TasksTable({ tasks, queryParams = null }) {
                                 Image
                             </TableHeading>
 
+                            {!hideProjectInfo && (<TableHeading name="project_title" sortable={false}>
+                                Project Title
+                            </TableHeading>
+                          )}
+
                             <TableHeading
                                 name="name"
                                 sort_field={queryParams.sort_field}
@@ -97,6 +102,9 @@ export default function TasksTable({ tasks, queryParams = null }) {
                         <tr>
                             <th className="whitespace-nowrap px-4 py-2 font-medium text-gray-900"></th>
                             <th className="whitespace-nowrap px-4 py-2 font-medium text-gray-900"></th>
+                            {!hideProjectInfo && (
+                                <th className="whitespace-nowrap px-4 py-2 font-medium text-gray-900"></th>
+                            )}
                             <th className="whitespace-nowrap px-4 py-2 font-medium text-gray-900">
                                 <TextInput
                                     className="w-fit lg:w-full"
@@ -147,6 +155,11 @@ export default function TasksTable({ tasks, queryParams = null }) {
                                 <td className="whitespace-nowrap px-4 py-3 text-gray-700">
                                     <img src={task.image_path} alt="" />
                                 </td>
+                                {!hideProjectInfo && (
+                                    <td className="whitespace-nowrap px-4 py-3 text-gray-700">
+                                        {task.project.name}
+                                    </td>
+                                )}
                                 <td className="whitespace-nowrap px-4 py-3 text-gray-700">
                                     {task.name}
                                 </td>
