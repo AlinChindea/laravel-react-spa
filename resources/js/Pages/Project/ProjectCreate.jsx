@@ -18,7 +18,7 @@ export default function ProjectCreate({ auth }) {
     const handleSubmit = (e) => {
         e.preventDefault();
 
-        post(route("projects.store"));
+        post(route("project.store"));
     };
 
     return (
