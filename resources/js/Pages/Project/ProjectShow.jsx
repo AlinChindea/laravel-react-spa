@@ -6,7 +6,7 @@ import {
 } from "@/constants.jsx";
 import TasksTable from "../Tasks/TasksTable";
 
-export default function ProjectShow({ auth, project, tasks, queryParams }) {
+export default function ProjectShow({ auth, success, project, tasks, queryParams }) {
     return (
         <AuthenticatedLayout
             user={auth.user}
@@ -113,6 +113,7 @@ export default function ProjectShow({ auth, project, tasks, queryParams }) {
                                     tasks={tasks}
                                     queryParams={queryParams}
                                     hideProjectInfo={true}
+                                    success={success}
                                 />
                             ) : (
                                 <div className="text-center">

@@ -53,7 +53,7 @@ export default function ProjectIndex({
             return;
         }
 
-        router.delete(route("project.destroy", project));
+        router.delete(route("project.destroy", project.id));
     };
 
     return (
