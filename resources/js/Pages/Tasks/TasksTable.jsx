@@ -12,6 +12,7 @@ import {
 
 export default function TasksTable({
     tasks,
+    success,
     queryParams = null,
     hideProjectInfo = false,
 }) {
@@ -48,8 +49,21 @@ export default function TasksTable({
         router.get(route("task.index", queryParams));
     };
 
+    const deleteTask = (task) => {
+        if (!window.confirm("Are you sure you want to delete this task?")) {
+            return;
+        }
+
+        router.delete(route("task.destroy", task.id));
+    };
+
     return (
         <>
+            {success && (
+                <div className="bg-emerald-500 py-2 px-4 text-white rounded mb-4">
+                    {success}
+                </div>
+            )}
             <div className="overflow-x-auto">
                 <table className="w-full text-sm text-left rtl:text-right text-gray-900 divide-y-2 divide-gray-200">
                     <thead className="text-xs text-gray-900 uppercase bg-gray-300">

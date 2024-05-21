@@ -39,6 +39,7 @@ class TaskController extends Controller
         return inertia('Tasks/Index', [
             'tasks' => TaskResource::collection($tasks),
             'queryParams' => request()->query() ?: null,
+            'success' => session('success'),
         ]);
     }
 
@@ -139,7 +140,7 @@ class TaskController extends Controller
         $task->update($data);
 
         return to_route('task.index')
-        ->with('success', 'Task ' . $task->name . ' updated successfully');
+            ->with('success', 'Task ' . $task->name . ' updated successfully');
     }
 
     /**
@@ -151,5 +152,8 @@ class TaskController extends Controller
         if ($task->image_path) {
             Storage::disk('public')->deleteDirectory(dirname($task->image_path));
         }
+
+        return to_route('task.index')
+            ->with('success', 'Task deleted successfully');
     }
 }
