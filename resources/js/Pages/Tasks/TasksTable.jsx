@@ -120,8 +120,8 @@ export default function TasksTable({
                             <TableHeading name="created_by" sortable={false}>
                                 Created by
                             </TableHeading>
-                            <th className="whitespace-nowrap px-4 py-2 font-medium">
-                                Action
+                            <th className="whitespace-nowrap px-4 py-2 font-medium text-center">
+                                Actions
                             </th>
                         </tr>
                     </thead>
@@ -203,7 +203,7 @@ export default function TasksTable({
                                     {task.created_at}
                                 </td>
                                 <td className="whitespace-nowrap px-4 py-3 text-gray-700">
-                                    {task.deadline}
+                                    {task.due_date}
                                 </td>
                                 <td className="whitespace-nowrap px-4 py-3 text-gray-700">
                                     {task.created_by.name}
