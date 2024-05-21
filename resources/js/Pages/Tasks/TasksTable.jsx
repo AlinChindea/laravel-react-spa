@@ -4,6 +4,11 @@ import SelectInput from "@/Components/SelectInput";
 import TextInput from "@/Components/TextInput";
 import TableHeading from "@/Components/TableHeading";
 import { TASK_STATUS_CLASS_MAP, TASK_STATUS_TEXT_MAP } from "@/constants.jsx";
+import {
+    PencilSquareIcon,
+    EyeIcon,
+    TrashIcon,
+} from "@heroicons/react/16/solid";
 
 export default function TasksTable({
     tasks,
@@ -190,12 +195,31 @@ export default function TasksTable({
                                     {task.created_by.name}
                                 </td>
                                 <td className="whitespace-nowrap px-4 py-3">
-                                    <Link
-                                        href={route("task.show", task.id)}
-                                        className="inline-block rounded bg-blue-600 px-4 py-2 text-xs font-medium text-white hover:bg-indigo-700"
-                                    >
-                                        View
-                                    </Link>
+                                    <div className="inline-flex rounded-lg border border-gray-100 bg-gray-100 p-1">
+                                        <Link
+                                            href={route("task.edit", task.id)}
+                                            className="inline-flex items-center gap-2 rounded-md px-4 py-2 text-sm text-blue-500 hover:text-blue-700 focus:relative"
+                                        >
+                                            <PencilSquareIcon className="h-4 w-4" />
+                                            Edit
+                                        </Link>
+
+                                        <Link
+                                            href={route("task.show", task.id)}
+                                            className="inline-flex items-center gap-2 rounded-md px-4 py-2 text-sm text-gray-500 hover:text-gray-700 focus:relative"
+                                        >
+                                            <EyeIcon className="h-4 w-4" />
+                                            View
+                                        </Link>
+
+                                        <button
+                                            onClick={(e) => deleteTask(task)}
+                                            className="inline-flex items-center gap-2 rounded-md bg-white px-4 py-2 text-sm text-red-500 hover:text-red-700 shadow-sm focus:relative"
+                                        >
+                                            <TrashIcon className="h-4 w-4" />
+                                            Delete
+                                        </button>
+                                    </div>
                                 </td>
                             </tr>
                         ))}
