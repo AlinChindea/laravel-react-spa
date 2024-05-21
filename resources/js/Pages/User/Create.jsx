@@ -116,8 +116,6 @@ export default function UserCreate({ auth }) {
                                     className="mt-2"
                                 />
                             </div>
-
-
                             <div className="mt-4 text-right">
                                 <Link
                                     href={route("user.index")}
