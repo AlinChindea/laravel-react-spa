@@ -3,10 +3,11 @@ import { Head, Link } from "@inertiajs/react";
 import {
     TASK_STATUS_CLASS_MAP,
     TASK_STATUS_TEXT_MAP,
+    TASK_PRIORITY_CLASS_MAP,
+    TASK_PRIORITY_TEXT_MAP,
 } from "@/constants.jsx";
-import TasksTable from "../Tasks/TasksTable";
 
-export default function Show({ auth, task, tasks, queryParams }) {
+export default function Show({ auth, task }) {
     return (
         <AuthenticatedLayout
             user={auth.user}
@@ -45,6 +46,26 @@ export default function Show({ auth, task, tasks, queryParams }) {
                                     </div>
                                     <div className="mt-4">
                                         <label className="font-bold text-lg">
+                                            Task Priority
+                                        </label>
+                                        <p className="mt-1">
+                                            <span
+                                                className={`px-2 py-1 rounded text-white ${
+                                                    TASK_PRIORITY_CLASS_MAP[
+                                                        task.priority
+                                                    ]
+                                                }`}
+                                            >
+                                                {
+                                                    TASK_PRIORITY_TEXT_MAP[
+                                                        task.priority
+                                                    ]
+                                                }
+                                            </span>
+                                        </p>
+                                    </div>
+                                    <div className="mt-4">
+                                        <label className="font-bold text-lg">
                                             Task Status
                                         </label>
                                         <p className="mt-1">
@@ -65,22 +86,33 @@ export default function Show({ auth, task, tasks, queryParams }) {
                                     </div>
                                 </div>
                                 <div>
-                                    <div>
+                                    <div className="mt-4">
                                         <label className="font-bold text-lg">
-                                            Deadline
+                                            Parent project
                                         </label>
-                                        <p className="mt-1">
-                                            {task.deadline}
+                                        <p className="mt-1 hover:underline cursor-pointer">
+                                            <Link href={route('project.show', task.project.id)}>
+                                                {task.project.name}
+                                            </Link>
                                         </p>
                                     </div>
                                     <div className="mt-4">
                                         <label className="font-bold text-lg">
-                                            Start Date
+                                            Project Manager
                                         </label>
                                         <p className="mt-1">
-                                            {task.created_at}
+                                            {task.assigned_user.name}
                                         </p>
                                     </div>
+                                    <div className="mt-4">
+                                        <label className="font-bold text-lg">
+                                            Implementation period
+                                        </label>
+                                        <p className="mt-1">
+                                            {task.created_at} - {task.due_date}
+                                        </p>
+                                    </div>
+
                                     <div className="mt-4">
                                         <label className="font-bold text-lg">
                                             Task Updated
@@ -104,27 +136,6 @@ export default function Show({ auth, task, tasks, queryParams }) {
                 </div>
             </div>
 
-            <div className="pb-12">
-                <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">
-                    <div className="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                        <div className="p-6 text-gray-900">
-                            {tasks.data.length > 0 ? (
-                                <TasksTable
-                                    tasks={tasks}
-                                    queryParams={queryParams}
-                                    hideTaskInfo={true}
-                                />
-                            ) : (
-                                <div className="text-center">
-                                    <p className="text-lg font-semibold">
-                                        No tasks found for this task.
-                                    </p>
-                                </div>
-                            )}
-                        </div>
-                    </div>
-                </div>
-            </div>
         </AuthenticatedLayout>
     );
 }
